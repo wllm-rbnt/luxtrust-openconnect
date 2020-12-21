@@ -1,0 +1,53 @@
+From 13b167e011d445cca698d0333496d4f386e0d532 Mon Sep 17 00:00:00 2001
+From: William Robinet <william.robinet@conostix.com>
+Date: Sun, 20 Dec 2020 17:59:32 +0100
+Subject: [PATCH] Fix LuxTrust + OpenConnect, possibly break some other stuff
+
+---
+ gnutls28-3.6.7/debian/changelog    | 6 ++++++
+ gnutls28-3.6.7/debian/rules        | 1 +
+ gnutls28-3.6.7/lib/ext/signature.c | 2 ++
+ 3 files changed, 9 insertions(+)
+
+diff --git a/gnutls28-3.6.7/debian/changelog b/gnutls28-3.6.7/debian/changelog
+index a9dfa7f..4070bb9 100644
+--- a/gnutls28-3.6.7/debian/changelog
++++ b/gnutls28-3.6.7/debian/changelog
+@@ -1,3 +1,9 @@
++gnutls28 (3.6.7-4+deb10u5-conostix) buster; urgency=medium
++
++  * Fix LuxTrust + openconnect, possibly break some other stuff
++
++ -- William Robinet <william.robinet@conostix.com>  Sun, 20 Dec 2020 01:23:45 +0100
++
+ gnutls28 (3.6.7-4+deb10u5) buster; urgency=medium
+ 
+   * 42_rel3.6.11_10-session-tickets-parse-extension-during-session-resum.patch
+diff --git a/gnutls28-3.6.7/debian/rules b/gnutls28-3.6.7/debian/rules
+index cbdf7fd..6b21b5f 100755
+--- a/gnutls28-3.6.7/debian/rules
++++ b/gnutls28-3.6.7/debian/rules
+@@ -31,6 +31,7 @@ CONFIGUREARGS = \
+ 	--with-packager=Debian \
+ 	--with-packager-bug-reports=http://bugs.debian.org/ \
+ 	--with-packager-version=$(DEB_VERSION) \
++	--disable-tests
+ 
+ BDIR = -O--builddirectory=b4deb
+ 
+diff --git a/gnutls28-3.6.7/lib/ext/signature.c b/gnutls28-3.6.7/lib/ext/signature.c
+index 44da666..684575e 100644
+--- a/gnutls28-3.6.7/lib/ext/signature.c
++++ b/gnutls28-3.6.7/lib/ext/signature.c
+@@ -310,6 +310,8 @@ _gnutls_session_get_sign_algo(gnutls_session_t session,
+ 			continue;
+ 
+ 		_gnutls_handshake_log("checking cert compat with %s\n", se->name);
++		if (se->name[9] != '1')
++			continue;
+ 
+ 		if (_gnutls_privkey_compatible_with_sig(privkey, priv->sign_algorithms[i]) == 0)
+ 			continue;
+-- 
+2.20.1
+
