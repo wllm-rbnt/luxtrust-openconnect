@@ -133,7 +133,7 @@ Launch OpenConnect with the right URIs (`-c` for the cert, `-k` for the key) and
 
 	$ sudo /usr/sbin/openconnect --disable-ipv6 --printcookie --dump-http-traffic -v -c 'pkcs11:model=Classic%20V3;manufacturer=Gemalto%20S.A.;serial=0123456789ABCDEF;token=GemP15-1;id=%00%01%02%03%04%05%06%07%08%09%0a%0b%0c%0d%0e%0f%10%11%12%13;object=User%20Cert%20Auth;object-type=cert' -k 'pkcs11:model=Classic%20V3;manufacturer=Gemalto%20S.A.;serial=0123456789ABCDEF;token=GemP15-1;id=%00%01%02%03%04%05%06%07%08%09%0a%0b%0c%0d%0e%0f%10%11%12%13;object=User%20Cert%20Auth;object-type=private' https://subdomain.domain.tld
 
-## After successfull connection
+## After successful connection
 
 Tweak your routing table to suit your needs, and restore your original
 (pre-connection) resolv.conf if required:
