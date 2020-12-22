@@ -43,7 +43,7 @@ Apply the GNUTLS fix:
 
 ## Build GNUTLS
 
-Compile GNUTLS:
+Compile GNUTLS (documentation build and tests disabled):
 
 	$ cd gnutls28-3.6.7
 	$ dpkg-buildpackage -rfakeroot -b
