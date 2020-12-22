@@ -143,6 +143,6 @@ Tweak your routing table to suit your needs, and restore your original
 	$ sudo ip r add default via <original_local_network_gateway>
 	$ sudo cp /var/run/vpnc/resolv.conf-backup /etc/resolv.conf
 
-where remote_subnet is the network you're trying to reach on the VPN and
-original_local_network_gateway is your local gateway.
+where `remote_subnet` is the network you're trying to reach on the VPN and
+`original_local_network_gateway` is your local gateway.
 
